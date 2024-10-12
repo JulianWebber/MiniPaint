@@ -1,3 +1,5 @@
+console.log('Paint.js loaded');
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('paintCanvas');
     const ctx = canvas.getContext('2d');
@@ -11,11 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fillBucketTool = document.getElementById('fillBucketTool');
     const clearCanvas = document.getElementById('clearCanvas');
 
+    console.log('All tools initialized:', {pencilTool, eraserTool, rectangleTool, circleTool, textTool, fillBucketTool});
+
     let isDrawing = false;
     let currentTool = 'pencil';
     let startX, startY;
 
-    // Set canvas size
     function setCanvasSize() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
@@ -26,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    // Drawing functions
     function startDrawing(e) {
         isDrawing = true;
         const rect = canvas.getBoundingClientRect();
@@ -206,13 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseout', stopDrawing);
 
-    // Touch events for mobile devices
     canvas.addEventListener('touchstart', (e) => {
         e.preventDefault();
         startDrawing(e.touches[0]);
@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     canvas.addEventListener('touchend', stopDrawing);
 
-    // Tool selection
     pencilTool.addEventListener('click', () => setTool('pencil'));
     eraserTool.addEventListener('click', () => setTool('eraser'));
     rectangleTool.addEventListener('click', () => setTool('rectangle'));
@@ -249,7 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Clear canvas
     clearCanvas.addEventListener('click', () => {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
