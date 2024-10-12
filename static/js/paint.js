@@ -1,6 +1,8 @@
-console.log('Paint.js loaded');
+console.log('Paint.js loading...');
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded event fired');
+
     const canvas = document.getElementById('paintCanvas');
     const ctx = canvas.getContext('2d');
     const colorPicker = document.getElementById('colorPicker');
@@ -231,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fillBucketTool.addEventListener('click', () => setTool('fillBucket'));
 
     function setTool(tool) {
+        console.log('Setting tool:', tool);
         currentTool = tool;
         [pencilTool, eraserTool, rectangleTool, circleTool, textTool, fillBucketTool].forEach(btn => btn.classList.remove('active'));
         document.getElementById(`${tool}Tool`).classList.add('active');
@@ -252,4 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     });
+
+    console.log('Paint.js loaded successfully');
 });
+
+console.log('Paint.js finished loading');
